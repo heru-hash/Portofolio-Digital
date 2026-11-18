@@ -3,6 +3,7 @@ import { applyActionCode, onAuthStateChanged, signOut, type User } from 'firebas
 import {
   auth,
   ensureFirestoreNetworkOnline,
+  firebaseConfig,
   formatAuthErrorMessage,
   getQuotaUpgradeUrl,
   sendVerificationEmailSafe,
@@ -636,7 +637,7 @@ export default function App() {
             }
             notify(
               'info',
-              'Email belum terverifikasi. Klik tautan pada email dari noreply@gen-lang-client-0131469651.firebaseapp.com lalu coba lagi.'
+              `Email belum terverifikasi. Klik tautan pada email dari noreply@${firebaseConfig.authDomain} lalu coba lagi.`
             );
             return { verified: false };
           } catch (err: unknown) {

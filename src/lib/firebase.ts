@@ -18,6 +18,16 @@ import { getStorage } from 'firebase/storage';
 import firebaseConfig from '../../firebase-applet-config.json';
 
 export const BOOTSTRAP_ADMIN_EMAIL = 'rehu.cyuit93@gmail.com';
+export const BOOTSTRAP_ADMIN_EMAILS = [
+  'rehu.cyuit93@gmail.com',
+  'heru@smanike-gresik.sch.id',
+] as const;
+
+export function isBootstrapAdminEmail(email?: string | null): boolean {
+  if (!email) return false;
+  const normalized = email.trim().toLowerCase();
+  return BOOTSTRAP_ADMIN_EMAILS.some((adminEmail) => adminEmail.toLowerCase() === normalized);
+}
 
 const app = initializeApp(firebaseConfig);
 

@@ -14,7 +14,7 @@ import {
   where,
   type Unsubscribe,
 } from 'firebase/firestore';
-import { BOOTSTRAP_ADMIN_EMAIL, db, ensureFirestoreNetworkOnline } from './firebase';
+import { db, ensureFirestoreNetworkOnline, isBootstrapAdminEmail } from './firebase';
 import { handleFirestoreError, OperationType } from './firestoreError';
 import type {
   Achievement,
@@ -201,8 +201,7 @@ async function runEnsureUserInitialized(params: {
   }
 
   const isBootstrapAdmin =
-    Boolean(params.emailVerified) &&
-    safeEmail.toLowerCase() === BOOTSTRAP_ADMIN_EMAIL.toLowerCase();
+    Boolean(params.emailVerified) && isBootstrapAdminEmail(safeEmail);
   const defaultUsername = generateDefaultUsername(safeDisplayName, params.uid);
 
   let account: UserAccount;

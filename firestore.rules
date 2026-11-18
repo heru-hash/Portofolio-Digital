@@ -39,7 +39,7 @@ service cloud.firestore {
 
     function isAdmin() {
       return isSignedIn() && (
-        (request.auth.token.email == 'rehu.cyuit93@gmail.com' && isEmailVerified()) ||
+        (request.auth.token.email in ['rehu.cyuit93@gmail.com', 'heru@smanike-gresik.sch.id'] && isEmailVerified()) ||
         exists(/databases/$(database)/documents/admins/$(request.auth.uid))
       );
     }
